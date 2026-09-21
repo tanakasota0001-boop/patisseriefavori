@@ -38,9 +38,9 @@ const { contact: contactText } = siteConfig.content;
     >
       <!-- Modal Header -->
       <div class="text-center space-y-2 mb-6">
-        <span class="text-[10px] font-sans tracking-mega-wide uppercase text-orange-600 block">{contactText.badge}</span>
+        <span class="text-[10px] font-sans tracking-mega-wide uppercase text-gold-600 block">{contactText.badge}</span>
         <h3 class="text-2xl sm:text-3xl font-serif-title tracking-wider uppercase text-noir-900 font-light">{contactText.titleEn}</h3>
-        <div class="w-10 h-[1px] bg-orange-600 mx-auto"></div>
+        <div class="w-10 h-[1px] bg-gold-600 mx-auto"></div>
         <p class="text-xs sm:text-sm font-serif-jp text-stone-800 font-medium pt-1">
           {contactText.subtitleJa}
         </p>
@@ -50,13 +50,13 @@ const { contact: contactText } = siteConfig.content;
       </div>
 
       <!-- Main Phone CTA Box -->
-      <div class="mb-6 p-5 sm:p-6 bg-cream-200/90 border border-orange-600/30 rounded-sm text-center shadow-sm">
+      <div class="mb-6 p-5 sm:p-6 bg-cream-200/90 border border-gold-600/30 rounded-sm text-center shadow-sm">
         <p class="text-xs text-stone-700 font-serif-jp font-medium mb-2.5">{contactText.phoneNoticeTitle}</p>
         <a
           href={`tel:${store.tel.replace(/-/g, '')}`}
-          class="inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-noir-900 hover:bg-orange-600 text-cream-50 text-xl sm:text-2xl font-sans font-bold tracking-wider rounded-sm transition-all duration-300 shadow-md group w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-noir-900 hover:bg-gold-600 text-cream-50 text-xl sm:text-2xl font-sans font-bold tracking-wider rounded-sm transition-all duration-300 shadow-md group w-full sm:w-auto"
         >
-          <svg class="w-5 h-5 text-orange-600 group-hover:text-cream-50 transition-colors animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-gold-600 group-hover:text-cream-50 transition-colors animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
           </svg>
           <span>{store.tel}</span>
@@ -68,13 +68,13 @@ const { contact: contactText } = siteConfig.content;
       <div class="space-y-4 mb-6">
         <div class="bg-white/80 p-4 rounded-sm border border-stone-200">
           <h4 class="text-xs font-serif-jp font-bold text-noir-900 mb-3 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-gold-600"></span>
             {contactText.checklistTitle}
           </h4>
           <ul class="space-y-2.5 text-xs font-serif-jp text-stone-700">
             {contactText.checklistItems.map((item, idx) => (
               <li class="flex items-start gap-2.5">
-                <span class="font-sans font-bold text-orange-600 flex-shrink-0 text-xs">{idx + 1}.</span>
+                <span class="font-sans font-bold text-gold-600 flex-shrink-0 text-xs">{idx + 1}.</span>
                 <div>
                   <span class="font-medium text-stone-900">{item.label}</span>
                   <span class="text-stone-500 block text-[11px] mt-0.5">{item.detail}</span>

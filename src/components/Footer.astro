@@ -4,7 +4,7 @@ const { store, navigation } = siteConfig;
 const { footer } = siteConfig.content;
 ---
 
-<footer class="bg-[#321609] text-[#fff4eb] pt-20 pb-14 border-t border-[#220e05] relative">
+<footer class="bg-[#1e1b18] text-[#faf0e6] pt-20 pb-14 border-t border-[#2e2824] relative">
   <div class="max-w-[1560px] mx-auto px-6 sm:px-8 lg:px-12">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
       <!-- Brand Left -->
@@ -13,31 +13,31 @@ const { footer } = siteConfig.content;
           <img
             src={store.logoWhite || "/images/logo-white.png"}
             alt={store.nameEn}
-            class="h-10 sm:h-12 w-auto max-w-[280px] object-contain mb-2 group-hover:opacity-90 transition-opacity"
+            class="h-12 sm:h-14 lg:h-16 w-auto max-w-[320px] object-contain mb-3 group-hover:opacity-90 transition-opacity"
           />
         </a>
-        <p class="text-sm sm:text-base font-serif-jp text-[#faf0e6]/80 leading-relaxed max-w-sm">
+        <p class="text-sm sm:text-[14.5px] font-serif-jp text-[#faf0e6]/85 leading-[2.1] tracking-[0.05em] max-w-sm">
           {store.shortConcept}
         </p>
       </div>
 
       <!-- Quick Nav -->
-      <div class="md:col-span-3 space-y-3.5">
-        <h4 class="text-xs sm:text-sm font-sans tracking-ultra-wide uppercase text-orange-600 font-semibold">{footer.navTitle}</h4>
-        <ul class="space-y-2.5 text-sm sm:text-base font-sans tracking-wider text-[#faf0e6]/80">
+      <div class="md:col-span-3 space-y-4">
+        <h4 class="text-xs sm:text-[13px] font-sans tracking-[0.25em] uppercase text-gold-500 font-semibold">{footer.navTitle}</h4>
+        <ul class="space-y-3 text-sm sm:text-[14.5px] font-sans tracking-[0.15em] text-[#faf0e6]/80">
           {navigation.links.map(link => (
-            <li><a href={link.href} class="hover:text-orange-600 transition-colors">{link.labelEn}</a></li>
+            <li><a href={link.href} class="hover:text-gold-400 transition-colors uppercase">{link.labelEn}</a></li>
           ))}
         </ul>
       </div>
 
       <!-- Info & Contact -->
-      <div class="md:col-span-4 space-y-3.5">
-        <h4 class="text-xs sm:text-sm font-sans tracking-ultra-wide uppercase text-orange-600 font-semibold">{footer.storeTitle}</h4>
-        <address class="not-italic text-sm sm:text-base font-serif-jp text-[#f5ede4]/80 space-y-2.5 leading-relaxed">
+      <div class="md:col-span-4 space-y-4">
+        <h4 class="text-xs sm:text-[13px] font-sans tracking-[0.25em] uppercase text-gold-500 font-semibold">{footer.storeTitle}</h4>
+        <address class="not-italic text-sm sm:text-[14.5px] font-serif-jp text-[#f5ede4]/85 space-y-2.5 leading-relaxed tracking-wide">
           <p>〒{store.postalCode} {store.address}</p>
           <p>
-            <a href={`tel:${store.tel.replace(/-/g, '')}`} class="hover:text-orange-600 transition-colors font-medium">Tel. {store.tel}</a>
+            <a href={`tel:${store.tel.replace(/-/g, '')}`} class="hover:text-gold-400 transition-colors font-medium">Tel. {store.tel}</a>
           </p>
           <p>営業時間：{store.businessHours}</p>
           <p>定休日：{store.holidays}</p>
@@ -52,7 +52,7 @@ const { footer } = siteConfig.content;
                 href={store.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-orange-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
+                class="hover:text-gold-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
                 aria-label="Instagram"
                 title="Instagram"
               >
@@ -66,7 +66,7 @@ const { footer } = siteConfig.content;
                 href={store.threadsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-orange-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
+                class="hover:text-gold-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
                 aria-label="Threads"
                 title="Threads"
               >
@@ -80,7 +80,7 @@ const { footer } = siteConfig.content;
                 href={store.xUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-orange-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
+                class="hover:text-gold-600 transition-all duration-300 hover:scale-115 inline-flex items-center justify-center p-1"
                 aria-label="X (Twitter)"
                 title="X (Twitter)"
               >
@@ -97,7 +97,7 @@ const { footer } = siteConfig.content;
     <!-- Bottom Bar -->
     <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm font-sans tracking-wider text-[#f5ede4]/60">
       <p>© {store.copyrightYear} {store.nameEn}. All Rights Reserved.</p>
-      <a href="#" class="mt-4 sm:mt-0 hover:text-orange-600 text-[#f5ede4]/80 transition-colors flex items-center gap-1.5 font-medium">
+      <a href="#" class="mt-4 sm:mt-0 hover:text-gold-600 text-[#f5ede4]/80 transition-colors flex items-center gap-1.5 font-medium">
         <span>{footer.backToTop}</span>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
       </a>

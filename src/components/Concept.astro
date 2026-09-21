@@ -7,13 +7,13 @@ const { concept: conceptText } = siteConfig.content;
 <section id="concept" class="py-24 sm:py-32 bg-cream-50 text-noir-900 relative overflow-hidden">
   <div class="max-w-[1560px] mx-auto px-6 sm:px-8 lg:px-12 scroll-fade-in">
     <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-3 mb-16 sm:mb-24">
-      <span class="text-xs font-sans tracking-mega-wide uppercase text-orange-600 block">{conceptText.badge}</span>
-      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-ultra-wide font-light uppercase">
+    <div class="text-center max-w-3xl mx-auto space-y-3.5 mb-16 sm:mb-24">
+      <span class="text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{conceptText.badge}</span>
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
         {conceptText.titleEn}
       </h2>
-      <div class="w-12 h-[1px] bg-orange-600 mx-auto"></div>
-      <p class="font-serif-jp text-sm sm:text-base text-stone-600 tracking-widest pt-2">{conceptText.subtitleJa}</p>
+      <div class="w-10 h-[1px] bg-gold-600/80 mx-auto"></div>
+      <p class="font-serif-jp text-xs sm:text-sm text-stone-600 tracking-[0.18em] pt-1 leading-relaxed">{conceptText.subtitleJa}</p>
     </div>
 
     <!-- Editorial Layout -->
@@ -28,7 +28,7 @@ const { concept: conceptText } = siteConfig.content;
           />
         </div>
         <!-- Floating secondary small image -->
-        <div class="hidden sm:block absolute -bottom-8 -right-8 w-60 h-60 z-20 overflow-hidden shadow-xl">
+        <div class="hidden sm:block absolute -bottom-8 -right-8 w-60 h-60 z-20 overflow-hidden shadow-xl border-2 border-white/80">
           <img
             src={conceptImg.sub}
             alt="Handcrafted pastry details"
@@ -40,13 +40,13 @@ const { concept: conceptText } = siteConfig.content;
       <!-- Text Right -->
       <div class="lg:col-span-6 space-y-6 lg:pl-6">
         <div class="space-y-6">
-          <h3 class="text-2xl sm:text-3xl lg:text-4xl xl:text-[38px] font-serif-jp font-normal sm:font-light leading-snug sm:leading-relaxed lg:leading-[1.4] tracking-wide text-noir-900 pb-2">
+          <h3 class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[36px] font-serif-jp font-light leading-[1.65] tracking-[0.06em] text-noir-900 pb-1">
             {(conceptText.lead || "すべてのお客さまの\n心のカギになるスイーツを").split('\n').map((line: string) => (
               <span class="block">{line}</span>
             ))}
           </h3>
           {conceptText.paragraphs.map(p => (
-            <p class="text-stone-600 font-serif-jp text-sm sm:text-base leading-relaxed sm:leading-loose tracking-wide whitespace-pre-line">
+            <p class="text-stone-700 font-serif-jp text-sm sm:text-[15px] leading-[2.1] tracking-[0.05em] whitespace-pre-line">
               {p}
             </p>
           ))}

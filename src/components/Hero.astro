@@ -17,7 +17,7 @@ const { heroSlides } = siteConfig.images;
         <div class="absolute inset-0 overflow-hidden">
           <img
             src={slide.url}
-            alt={slide.title || "save room for dessert MASTER KEY"}
+            alt={slide.title || siteConfig.store.nameEn}
             class={`w-full h-full object-cover scale-105 transition-transform duration-[7000ms] ease-out transform hero-bg-img ${
               index === 1 ? 'object-[85%_center] sm:object-center' : 'object-center'
             }`}
@@ -39,10 +39,10 @@ const { heroSlides } = siteConfig.images;
           }`}
           data-text-index={index}
         >
-          <span class="text-xs sm:text-sm font-sans tracking-mega-wide uppercase text-orange-600 font-semibold drop-shadow-md block mb-1">
+          <span class="text-[11px] sm:text-xs font-sans tracking-[0.35em] uppercase text-gold-400 font-semibold drop-shadow-md block mb-1.5">
             {slide.subTitle || siteConfig.store.subtitle}
           </span>
-          <h1 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-serif-jp text-cream-50 font-light tracking-wider leading-snug sm:leading-tight drop-shadow-lg max-w-full">
+          <h1 class="text-2xl sm:text-4xl md:text-[42px] lg:text-[48px] font-serif-jp text-cream-50 font-light tracking-[0.08em] leading-[1.38] sm:leading-[1.35] drop-shadow-lg max-w-full">
             {(slide.title || siteConfig.store.tagline).split('\n').map((line: string) => (
               <span class="block whitespace-nowrap overflow-hidden text-ellipsis max-w-full">{line}</span>
             ))}
@@ -59,7 +59,7 @@ const { heroSlides } = siteConfig.images;
         <button
           type="button"
           id="hero-prev-btn"
-          class="p-1 text-white/70 hover:text-orange-600 transition-colors focus:outline-none"
+          class="p-1 text-white/70 hover:text-gold-600 transition-colors focus:outline-none"
           aria-label="前のスライド"
         >
           <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
@@ -70,7 +70,7 @@ const { heroSlides } = siteConfig.images;
           {heroSlides.map((_, idx) => (
             <button
               type="button"
-              class={`hero-dot h-1.5 rounded-full transition-all duration-500 ${idx === 0 ? 'w-8 bg-orange-600' : 'w-2 bg-white/40 hover:bg-white/70'}`}
+              class={`hero-dot h-1.5 rounded-full transition-all duration-500 ${idx === 0 ? 'w-8 bg-gold-600' : 'w-2 bg-white/40 hover:bg-white/70'}`}
               data-index={idx}
               onclick={`window.__goToSlide(${idx})`}
               aria-label={`スライド ${idx + 1} を表示`}
@@ -82,7 +82,7 @@ const { heroSlides } = siteConfig.images;
         <button
           type="button"
           id="hero-next-btn"
-          class="p-1 text-white/70 hover:text-orange-600 transition-colors focus:outline-none"
+          class="p-1 text-white/70 hover:text-gold-600 transition-colors focus:outline-none"
           aria-label="次のスライド"
         >
           <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
@@ -90,7 +90,7 @@ const { heroSlides } = siteConfig.images;
       </div>
 
       <!-- Scroll Indicator -->
-      <a href="#concept" class="inline-flex items-center gap-2 text-[11px] font-sans tracking-widest uppercase text-cream-100/80 hover:text-orange-600 transition-colors">
+      <a href="#concept" class="inline-flex items-center gap-2 text-[10.5px] font-sans tracking-[0.25em] uppercase text-cream-100/90 hover:text-gold-400 transition-colors">
         <span>SCROLL</span>
         <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
       </a>
@@ -112,10 +112,10 @@ const { heroSlides } = siteConfig.images;
     function updateDots(index) {
       dots.forEach((dot, idx) => {
         if (idx === index) {
-          dot.classList.add('w-8', 'bg-orange-600');
+          dot.classList.add('w-8', 'bg-gold-600');
           dot.classList.remove('w-2', 'bg-white/40');
         } else {
-          dot.classList.remove('w-8', 'bg-orange-600');
+          dot.classList.remove('w-8', 'bg-gold-600');
           dot.classList.add('w-2', 'bg-white/40');
         }
       });
