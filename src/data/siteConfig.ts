@@ -84,8 +84,8 @@ export const siteConfig = {
       },
       {
         url: "/images/hero/02.png",
-        subTitle: "House Specialité",
-        title: "心ほどける美味しさ\nこだわりの生クリームと旬の果実",
+        subTitle: "Your Favorite Sweets",
+        title: "あなたのお気に入りに出会う\n心を満たす ひとつのお菓子",
         tag: "Crafted with Heart"
       }
     ],
