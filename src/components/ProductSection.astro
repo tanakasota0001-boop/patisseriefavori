@@ -7,13 +7,13 @@ const { menu } = siteConfig.content;
 <section id="collection" class="py-24 sm:py-32 bg-cream-100/50 text-noir-900 relative border-t border-stone-200/60">
   <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-10 scroll-fade-in">
     <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-3.5 mb-16 sm:mb-20">
-      <span class="text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{menu.badge}</span>
-      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
+    <div class="anim-section-header text-center max-w-3xl mx-auto space-y-3.5 mb-16 sm:mb-20">
+      <span class="anim-subtitle text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{menu.badge}</span>
+      <h2 class="anim-title-en text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
         {menu.titleEn}
       </h2>
-      <div class="w-10 h-[1px] bg-gold-600/80 mx-auto"></div>
-      <p class="font-serif-jp text-xs sm:text-sm text-stone-600 tracking-[0.18em] pt-1 leading-relaxed">
+      <div class="anim-gold-line w-10 h-[1px] bg-gold-600/80 mx-auto"></div>
+      <p class="anim-title-ja font-serif-jp text-xs sm:text-sm text-stone-600 tracking-[0.18em] pt-1 leading-relaxed">
         {menu.subtitleJa}
       </p>
     </div>
@@ -35,21 +35,21 @@ const { menu } = siteConfig.content;
     </div>
 
     <!-- Products Grid (Image-centric, 2 cols on mobile, 4 cols on large screens) -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 sm:gap-x-2.5 lg:gap-3 gap-y-4 sm:gap-y-6 lg:gap-y-8" id="products-grid">
+    <div class="anim-card-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 sm:gap-x-2.5 lg:gap-3 gap-y-4 sm:gap-y-6 lg:gap-y-8" id="products-grid">
       {products.map(product => (
         <div
-          class="product-item group cursor-pointer flex flex-col"
+          class="anim-card-item product-item group cursor-pointer flex flex-col"
           data-category={product.category}
           data-product-id={product.id}
           onclick={`openProductModal('${product.id}')`}
         >
           <!-- Portrait Image Thumbnail -->
-          <div class="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-stone-100 mb-2 sm:mb-2.5">
+          <div class="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-stone-100 mb-2 sm:mb-2.5 rounded-sm">
             <img
               src={product.image}
               alt={product.name}
               loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
+              class="card-img-parallax w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
             />
             <!-- Chic Monochrome Hover Overlay (matching Instagram badge style) -->
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">

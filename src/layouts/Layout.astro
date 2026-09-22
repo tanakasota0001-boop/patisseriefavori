@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../data/siteConfig';
+import ThreeCanvas from '../components/ThreeCanvas.astro';
 
 interface Props {
   title?: string;
@@ -13,7 +14,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="ja" class="scroll-smooth">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,14 +66,14 @@ const {
 
       /* Custom scrollbar styling */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 7px;
       }
       ::-webkit-scrollbar-track {
         background: #f6f3eb;
       }
       ::-webkit-scrollbar-thumb {
         background: #c8bba3;
-        border-radius: 3px;
+        border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #b4824d;
@@ -91,7 +92,29 @@ const {
       }
     </style>
   </head>
-  <body class="selection:bg-gold-300 selection:text-noir-900">
-    <slot />
+  <body class="selection:bg-gold-300 selection:text-noir-900 relative">
+    <!-- Slender Gold Scroll Progress Indicator -->
+    <div
+      id="scroll-progress-bar"
+      class="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 origin-left z-[9999] pointer-events-none scale-x-0"
+    ></div>
+
+    <!-- 3D Three.js Background Particle Canvas -->
+    <ThreeCanvas />
+
+    <!-- Page Content -->
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <!-- Initialize Scroll Animations & Lenis -->
+    <script>
+      import { initScrollExperience } from '../scripts/scrollAnimations';
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollExperience);
+      } else {
+        initScrollExperience();
+      }
+    </script>
   </body>
 </html>

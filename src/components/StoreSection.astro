@@ -7,19 +7,19 @@ const { store: storeText } = siteConfig.content;
 <section id="store" class="py-24 sm:py-32 bg-cream-50 text-noir-900 border-t border-stone-200/60 relative">
   <div class="max-w-[1240px] mx-auto px-6 sm:px-8 lg:px-12 scroll-fade-in">
     <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-3.5 mb-12 sm:mb-16">
-      <span class="text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{storeText.badge}</span>
-      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
+    <div class="anim-section-header text-center max-w-3xl mx-auto space-y-3.5 mb-12 sm:mb-16">
+      <span class="anim-subtitle text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{storeText.badge}</span>
+      <h2 class="anim-title-en text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
         {storeText.titleEn}
       </h2>
-      <div class="w-10 h-[1px] bg-gold-600/80 mx-auto"></div>
+      <div class="anim-gold-line w-10 h-[1px] bg-gold-600/80 mx-auto"></div>
     </div>
 
     <!-- Store Layout: Unified Store Info & Calendar on Left, Map on Right -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
       
       <!-- Left Column: Store Info & Calendar (Natural / Flat Design) -->
-      <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
+      <div class="store-calendar-anim lg:col-span-6 flex flex-col justify-between space-y-6">
         
         <!-- Top: Store Identity -->
         <div class="border-b border-stone-300/80 pb-4">

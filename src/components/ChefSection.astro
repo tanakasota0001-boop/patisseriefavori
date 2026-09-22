@@ -5,40 +5,40 @@ const { about: aboutText } = siteConfig.content;
 const { store } = siteConfig;
 ---
 
-<section id="about" class="py-24 sm:py-32 bg-cream-100/50 text-noir-900 border-t border-stone-200/60 relative overflow-hidden">
+<section id="chef" class="py-24 sm:py-32 bg-cream-100/50 text-noir-900 border-t border-stone-200/60 relative overflow-hidden">
   <div class="max-w-[1560px] mx-auto px-6 sm:px-8 lg:px-12 scroll-fade-in">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
       <!-- Chef / Atelier Image Left (Desktop only) -->
       <div class="hidden lg:block lg:col-span-6 relative">
-        <div class="relative overflow-hidden shadow-2xl border border-stone-300">
+        <div class="chef-img-anim relative overflow-hidden shadow-2xl border border-stone-300 rounded-sm">
           <img
             src={aboutImg.image}
             alt="Pastry Chef at Kitchen"
-            class="w-full h-[500px] sm:h-[620px] object-cover object-center hover:scale-102 transition-transform duration-700"
+            class="card-img-parallax w-full h-[500px] sm:h-[620px] object-cover object-center will-change-transform"
           />
         </div>
       </div>
 
       <!-- Message Right (Desktop Right Column / Mobile Sequential Flow) -->
       <div class="lg:col-span-6 space-y-8 lg:pl-4">
-        <div class="space-y-3.5">
-          <span class="text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{aboutText.badge}</span>
-          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
+        <div class="anim-section-header space-y-3.5">
+          <span class="anim-subtitle text-[11px] sm:text-xs font-sans tracking-[0.3em] uppercase text-gold-600 font-semibold block">{aboutText.badge}</span>
+          <h2 class="anim-title-en text-3xl sm:text-5xl lg:text-6xl font-serif-title tracking-[0.2em] font-light uppercase text-noir-900">
             {aboutText.titleEn}
           </h2>
-          <div class="w-10 h-[1px] bg-gold-600/80"></div>
-          <p class="font-serif-jp text-xs sm:text-sm text-stone-600 tracking-[0.18em] pt-1 leading-relaxed">{aboutText.subtitleJa}</p>
+          <div class="anim-gold-line w-10 h-[1px] bg-gold-600/80"></div>
+          <p class="anim-title-ja font-serif-jp text-xs sm:text-sm text-stone-600 tracking-[0.18em] pt-1 leading-relaxed">{aboutText.subtitleJa}</p>
         </div>
 
         <div class="space-y-6 text-stone-700 font-serif-jp text-sm sm:text-[15px] leading-[2.1] tracking-[0.05em]">
           {aboutText.paragraphs.map(p => (
-            <p class="whitespace-pre-line">{p}</p>
+            <p class="chef-body-anim whitespace-pre-line">{p}</p>
           ))}
         </div>
 
         <!-- Chef Image (Mobile only - placed directly above chef name) -->
         <div class="block lg:hidden my-6 sm:my-8">
-          <div class="relative overflow-hidden shadow-2xl border border-stone-300">
+          <div class="chef-img-anim relative overflow-hidden shadow-2xl border border-stone-300 rounded-sm">
             <img
               src={aboutImg.image}
               alt="Pastry Chef at Kitchen"

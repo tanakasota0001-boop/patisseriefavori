@@ -13,12 +13,12 @@ const { heroSlides } = siteConfig.images;
         }`}
         data-slide-index={index}
       >
-        <!-- Background Image with smooth zoom effect -->
+        <!-- Background Image with smooth zoom effect & scroll-driven parallax -->
         <div class="absolute inset-0 overflow-hidden">
           <img
             src={slide.url}
             alt={slide.title || siteConfig.store.nameEn}
-            class={`w-full h-full object-cover scale-105 transition-transform duration-[7000ms] ease-out transform hero-bg-img ${
+            class={`w-full h-full object-cover scale-105 transition-transform duration-[7000ms] ease-out transform hero-bg-img hero-bg-parallax ${
               index === 1 ? 'object-[85%_center] sm:object-center' : 'object-center'
             }`}
           />
@@ -29,8 +29,8 @@ const { heroSlides } = siteConfig.images;
     ))}
   </div>
 
-  <!-- Hero Content / Synchronized Slide Catchcopy -->
-  <div class="absolute inset-0 z-20 flex flex-col justify-end pb-12 sm:pb-16 px-6 sm:px-8 lg:px-12 max-w-[1560px] mx-auto pointer-events-none">
+  <!-- Hero Content / Synchronized Slide Catchcopy (with Scroll-driven fade & drift) -->
+  <div class="hero-content-anim absolute inset-0 z-20 flex flex-col justify-end pb-12 sm:pb-16 px-6 sm:px-8 lg:px-12 max-w-[1560px] mx-auto pointer-events-none">
     <div class="space-y-2 sm:space-y-3 pointer-events-auto max-w-2xl min-h-[120px] sm:min-h-[140px] flex flex-col justify-end">
       {heroSlides.map((slide, index) => (
         <div

@@ -1,0 +1,278 @@
+---
+// ThreeCanvas.astro: Interactive 3D Gold Dust & Floating Particles Canvas (WebGL)
+---
+
+<div id="three-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+  <canvas id="webgl-canvas" class="w-full h-full block opacity-70 transition-opacity duration-1000"></canvas>
+</div>
+
+<script>
+  import * as THREE from 'three';
+
+  function initThreeCanvas() {
+    const container = document.getElementById('three-container');
+    const canvas = document.getElementById('webgl-canvas') as HTMLCanvasElement;
+    if (!container || !canvas) return;
+
+    // Check prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    // Scene & Camera
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 80;
+
+    // WebGL Renderer with alpha transparency
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Particle Texture Generator (Smooth Gold Bokeh & Shimmer Glow)
+    function createParticleTexture() {
+      const size = 64;
+      const c = document.createElement('canvas');
+      c.width = size;
+      c.height = size;
+      const ctx = c.getContext('2d');
+      if (!ctx) return new THREE.Texture();
+
+      const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.2, 'rgba(218, 165, 96, 0.9)');
+      gradient.addColorStop(0.5, 'rgba(180, 130, 77, 0.4)');
+      gradient.addColorStop(0.8, 'rgba(196, 147, 95, 0.1)');
+      gradient.addColorStop(1, 'rgba(196, 147, 95, 0)');
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, size, size);
+
+      const texture = new THREE.CanvasTexture(c);
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    // Secondary Clover/Petal Particle Texture Generator
+    function createPetalTexture() {
+      const size = 64;
+      const c = document.createElement('canvas');
+      c.width = size;
+      c.height = size;
+      const ctx = c.getContext('2d');
+      if (!ctx) return new THREE.Texture();
+
+      ctx.save();
+      ctx.translate(size / 2, size / 2);
+      ctx.fillStyle = 'rgba(196, 147, 95, 0.85)';
+      
+      // Draw a subtle rounded heart/petal leaf
+      ctx.beginPath();
+      ctx.moveTo(0, 4);
+      ctx.bezierCurveTo(-14, -12, -22, 6, 0, 22);
+      ctx.bezierCurveTo(22, 6, 14, -12, 0, 4);
+      ctx.fill();
+      ctx.restore();
+
+      const texture = new THREE.CanvasTexture(c);
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    const particleTexture = createParticleTexture();
+    const petalTexture = createPetalTexture();
+
+    // 1. Gold Dust Particles (Fine Shimmer)
+    const dustCount = window.innerWidth < 768 ? 90 : 180;
+    const dustGeometry = new THREE.BufferGeometry();
+    const dustPositions = new Float32Array(dustCount * 3);
+    const dustScales = new Float32Array(dustCount);
+    const dustSpeeds = new Float32Array(dustCount);
+    const dustAngles = new Float32Array(dustCount);
+
+    for (let i = 0; i < dustCount; i++) {
+      const i3 = i * 3;
+      dustPositions[i3] = (Math.random() - 0.5) * 140;
+      dustPositions[i3 + 1] = (Math.random() - 0.5) * 200;
+      dustPositions[i3 + 2] = (Math.random() - 0.5) * 90;
+
+      dustScales[i] = Math.random() * 2.8 + 1.2;
+      dustSpeeds[i] = (Math.random() * 0.4 + 0.15) * (Math.random() > 0.5 ? 1 : -1);
+      dustAngles[i] = Math.random() * Math.PI * 2;
+    }
+
+    dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+
+    const dustMaterial = new THREE.PointsMaterial({
+      size: 4.5,
+      map: particleTexture,
+      transparent: true,
+      opacity: 0.65,
+      blending: THREE.NormalBlending,
+      depthWrite: false
+    });
+
+    const dustParticles = new THREE.Points(dustGeometry, dustMaterial);
+    scene.add(dustParticles);
+
+    // 2. Floating Confectionery Petals / Gold Flakes (Larger Floating Elements)
+    const petalCount = window.innerWidth < 768 ? 16 : 32;
+    const petalGeometry = new THREE.BufferGeometry();
+    const petalPositions = new Float32Array(petalCount * 3);
+    const petalRotations = new Float32Array(petalCount * 3);
+
+    for (let i = 0; i < petalCount; i++) {
+      const i3 = i * 3;
+      petalPositions[i3] = (Math.random() - 0.5) * 130;
+      petalPositions[i3 + 1] = (Math.random() - 0.5) * 180;
+      petalPositions[i3 + 2] = (Math.random() - 0.5) * 60 + 10;
+
+      petalRotations[i3] = Math.random() * 0.02 - 0.01;
+      petalRotations[i3 + 1] = Math.random() * 0.02 - 0.01;
+      petalRotations[i3 + 2] = Math.random() * 0.02 - 0.01;
+    }
+
+    petalGeometry.setAttribute('position', new THREE.BufferAttribute(petalPositions, 3));
+
+    const petalMaterial = new THREE.PointsMaterial({
+      size: 8.0,
+      map: petalTexture,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.NormalBlending,
+      depthWrite: false
+    });
+
+    const petalParticles = new THREE.Points(petalGeometry, petalMaterial);
+    scene.add(petalParticles);
+
+    // Dynamic State & Scroll-Driven Values
+    let targetScrollY = 0;
+    let currentScrollY = 0;
+    let scrollVelocity = 0;
+    let lastScroll = window.scrollY;
+
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
+
+    // Mouse Move Listener
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 15;
+      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 15;
+    }, { passive: true });
+
+    // Touch Move Listener
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        targetMouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 15;
+        targetMouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 15;
+      }
+    }, { passive: true });
+
+    // Resize Handler
+    function handleResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }
+    window.addEventListener('resize', handleResize);
+
+    // Animation Loop
+    let clock = new THREE.Clock();
+    let isVisible = true;
+
+    document.addEventListener('visibilitychange', () => {
+      isVisible = !document.hidden;
+      if (isVisible) clock.start();
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!isVisible) return;
+
+      const elapsedTime = clock.getElapsedTime();
+
+      // Instant Direct Scroll Tracking
+      targetScrollY = window.scrollY;
+      const scrollDiff = targetScrollY - lastScroll;
+      lastScroll = targetScrollY;
+      scrollVelocity = scrollDiff;
+      currentScrollY = targetScrollY;
+
+      // Mouse Smoothing (Lerp)
+      currentMouseX += (targetMouseX - currentMouseX) * 0.05;
+      currentMouseY += (targetMouseY - currentMouseY) * 0.05;
+
+      // Scroll-Driven Camera Motion:
+      const scrollProgress = currentScrollY / (document.documentElement.scrollHeight - window.innerHeight || 1);
+      
+      camera.position.y = -currentScrollY * 0.035;
+      camera.position.x = currentMouseX * 0.8 + Math.sin(scrollProgress * Math.PI * 4) * 3;
+      camera.rotation.z = currentMouseX * 0.005 + Math.cos(scrollProgress * Math.PI * 2) * 0.03;
+      camera.rotation.y = -currentMouseX * 0.008;
+
+      // 1. Animate Dust Particles
+      const dustPos = dustGeometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < dustCount; i++) {
+        const i3 = i * 3;
+        dustPos[i3 + 1] -= (dustSpeeds[i] + scrollVelocity * 0.04);
+        dustPos[i3] += Math.sin(elapsedTime * 0.5 + dustAngles[i]) * 0.05;
+
+        const topLimit = -camera.position.y + 100;
+        const bottomLimit = -camera.position.y - 100;
+
+        if (dustPos[i3 + 1] < bottomLimit) {
+          dustPos[i3 + 1] = topLimit;
+          dustPos[i3] = (Math.random() - 0.5) * 140;
+        } else if (dustPos[i3 + 1] > topLimit) {
+          dustPos[i3 + 1] = bottomLimit;
+          dustPos[i3] = (Math.random() - 0.5) * 140;
+        }
+      }
+      dustGeometry.attributes.position.needsUpdate = true;
+      dustParticles.rotation.y = elapsedTime * 0.03 + scrollProgress * 0.5;
+
+      // 2. Animate Petal Particles
+      const petalPos = petalGeometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < petalCount; i++) {
+        const i3 = i * 3;
+        petalPos[i3 + 1] -= (0.12 + scrollVelocity * 0.06);
+        petalPos[i3] += Math.cos(elapsedTime * 0.3 + i) * 0.08;
+
+        const topLimit = -camera.position.y + 90;
+        const bottomLimit = -camera.position.y - 90;
+
+        if (petalPos[i3 + 1] < bottomLimit) {
+          petalPos[i3 + 1] = topLimit;
+          petalPos[i3] = (Math.random() - 0.5) * 130;
+        } else if (petalPos[i3 + 1] > topLimit) {
+          petalPos[i3 + 1] = bottomLimit;
+          petalPos[i3] = (Math.random() - 0.5) * 130;
+        }
+      }
+      petalGeometry.attributes.position.needsUpdate = true;
+      petalParticles.rotation.y = -elapsedTime * 0.02 - scrollProgress * 0.3;
+      petalParticles.rotation.x = Math.sin(elapsedTime * 0.2) * 0.05;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThreeCanvas);
+  } else {
+    initThreeCanvas();
+  }
+</script>
